@@ -12,6 +12,6 @@ copies the file successfully (password is `my-pass`), and `/tmp/log` shows a zer
 
 `curl --upload-file /some/file --insecure --user my-user:my-pass scp://127.0.0.1:8022/tmp`
 
-shows exit status 1 (server side, the client side still returns 0), even though the file is still copied successfully (I'm not sure why --insecure is needed for the demo but that's irrelevant to my issue).
+shows exit status 1 (server side, the client side still returns 0), even though the file is still copied successfully (I'm not sure why `--insecure` is needed for the demo but that's irrelevant to my issue).
 
 The sshd `/var/log/sshd` error log doesn't give any indication why the return status was non-zero, and using `--verbose` on the client side doesn't suggest that anything went wrong.
