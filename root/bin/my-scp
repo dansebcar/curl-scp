@@ -3,8 +3,12 @@
 import os
 import subprocess
 
+in_ = subprocess.Popen(["tee", "/tmp/in"], stdout=subprocess.PIPE)
+out = subprocess.Popen(["tee", "/tmp/out"], stdin=subprocess.PIPE)
+err = subprocess.Popen(["tee", "/tmp/err"], stdin=subprocess.PIPE)
+
 cmd = os.getenv("SSH_ORIGINAL_COMMAND")
-proc = subprocess.Popen(cmd, shell=True)
+proc = subprocess.Popen(cmd, shell=True, stdin=in_.stdout, stdout=out.stdin, stderr=err.stdin)
 code = proc.wait()
 
 with open("/tmp/log", "a") as f:

@@ -6,11 +6,11 @@ Then run `up` to start the container and `sshd` on port 8022.
 
 Then, outside the container, observe that
 
-`scp -P 8022 /some/file my-user@127.0.0.1:/tmp`
+`test-scp /some/file`
 
 copies the file successfully (password is `my-pass`), and `/tmp/log` shows a zero exit status, whereas
 
-`curl --upload-file /some/file --insecure --user my-user:my-pass scp://127.0.0.1:8022/tmp`
+`test-curl /some/file`
 
 shows exit status 1 (server side, the client side still returns 0), even though the file is still copied successfully (I'm not sure why `--insecure` is needed for the demo but that's irrelevant to my issue).
 
