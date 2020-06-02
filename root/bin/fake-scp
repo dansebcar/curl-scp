@@ -1,0 +1,17 @@
+#!/usr/bin/env python3
+
+import subprocess
+import sys
+import time
+
+MSG = b"Hello, World!\n"
+TRAILING_NULL = b"\0" if sys.argv[1:] else b""
+
+proc = subprocess.Popen(["scp", "-t", "/tmp/hello"], stdin=subprocess.PIPE)
+proc.stdin.write(b"C0644 %d tmp\n" % (len(MSG),))
+time.sleep(0.1)
+proc.stdin.write(b"%s%s" % (MSG, TRAILING_NULL))
+time.sleep(0.1)
+proc.stdin.close()
+code = proc.wait()
+print(f"scp exited with code {code}")
