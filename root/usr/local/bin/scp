@@ -1,0 +1,5 @@
+#!/bin/sh
+
+cmd="/usr/bin/scp -t /tmp/hello"
+$cmd
+echo "$cmd exited with code $?" > /tmp/log
